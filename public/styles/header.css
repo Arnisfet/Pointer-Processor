@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Ensure full height */
+    width: 100%; /* Ensure full width */
+}
+
+.top-header {
+    width: 100%; /* Full width */
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+    background: black; /* Set the background color */
+}
+
+.down-header {}
+
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 2.8;
+    color: white; /* A softer color for better readability */
+    text-align: center; /* Center the text for a balanced look */
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+h2 {
+
+}
