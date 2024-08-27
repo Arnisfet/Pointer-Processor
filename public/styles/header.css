@@ -7,31 +7,42 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%; /* Ensure full height */
-    width: 100%; /* Ensure full width */
-}
-
 .top-header {
     width: 100%; /* Full width */
     margin: 0; /* Remove margin */
     padding: 0; /* Remove padding */
-    background: black; /* Set the background color */
+    background: black;
 }
 
-.down-header {}
-
-
-h1 {
+.top-header h3 {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 2.8;
     color: white; /* A softer color for better readability */
     text-align: center; /* Center the text for a balanced look */
     margin-bottom: 20px; /* Add some space below the heading */
 }
 
-h2 {
+.down-header {
+    background: white;
+    /*justify-content: space-between; !* Pushes items to the edges *!*/
+    display: flex;
+    margin-right: 10px;
+}
 
+.down-header h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 24px;
+    padding: 10px;
+    margin-right: 140px;
+    line-height: 1.8;
+}
+
+.down-header button {
+    margin-top: 9px;
+    margin-left: 30px; /* Adds some space between the h1 and button */
+    width: 140px;
+    height: 50px;
 }
