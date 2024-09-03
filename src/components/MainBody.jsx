@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { blocks } from '../../data/data.js';
+import FileUploader from './FileUploader.jsx';
+import { TextField } from './TextField.jsx';
 
 function MainBlock(props) {
   return (
-    <div className="text-base">
+    <div>
       <h1>Основные функции веб интерфейса</h1>
       <p>
         {props.description}
+      </p>
         <ul>
           <li>{props.firstOption}</li>
           <li>{props.secondOption}</li>
           <li>{props.thirdOption}</li>
           <li>{props.fourthOption}</li>
         </ul>
-      </p>
     </div>
   );
 }
 
 function TextBlock(props) {
   return (
-    <div className="text-base">
+    <div>
       <h1>{props.title}</h1>
       <p>
         {props.description}
@@ -65,7 +67,7 @@ export default function MainBody({ selectedOption }) {
 // Define all components outside MainBody (best practice)
 function DefaultBody() {
   return (
-    <div>
+    <div className="base">
       <MainBlock
         title={blocks[0].title}
         description={blocks[0].description}
@@ -79,17 +81,26 @@ function DefaultBody() {
 
 function FirstOption() {
   return (
-    <div>
-      <TextBlock
-      title={blocks[1].title}
-      description={blocks[1].description}/>
+    <div className="base">
+      <TextBlock title={blocks[1].title} description={blocks[1].description} />
+      <ul>
+        <li>Прикрепить файл с координатами для сбора аудиторий</li>
+        <li>Указать радиус в метрах</li>
+        <li>Указать дату старта сбора</li>
+        <li>Указать дату конца сбора</li>
+      </ul>
+      <div>
+        <FileUploader />
+        <p>Поле</p>
+        <TextField />
+      </div>
     </div>
   );
 }
 
 function SecondOption() {
   return (
-    <div>
+    <div className="base">
       <h1>Second Option for the first button</h1>
     </div>
   );
@@ -97,7 +108,7 @@ function SecondOption() {
 
 function ThirdOption() {
   return (
-    <div>
+    <div className="base">
       <h1>Third Option for the first button</h1>
     </div>
   );
@@ -105,7 +116,7 @@ function ThirdOption() {
 
 function FourthOption() {
   return (
-    <div>
+    <div className="base">
       <h1>Fourth Option for the first button</h1>
     </div>
   );

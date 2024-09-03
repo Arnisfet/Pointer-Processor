@@ -7,18 +7,20 @@
     transition: all 0.3s ease;
 }
 
-.main-body .text-base{
+.main-body .base{
     background: white;
-    margin-top: 10px;
     padding: 10px;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 15px;
     line-height: 2.8;
     letter-spacing: 1px;
+    border: 1px solid rgba(170,155,180,1);         /* Sets the border width and color */
+    border-radius: 10px;
+    margin: 20px auto;
 }
 
-p {
+ul {
     background: white;
     padding: 10px 20px;             /* Adjusts the padding inside the oval */
     border: 1px solid rgba(170,155,180,1);         /* Sets the border width and color */
