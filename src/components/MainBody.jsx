@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { blocks } from '../../data/data.js';
 import FileUploader from './FileUploader.jsx';
 import { TextField } from './TextField.jsx';
+import { buttonName } from '../../data/button-naming.js';
+
 
 function MainBlock(props) {
   return (
     <div>
       <h1>Основные функции веб интерфейса</h1>
       <p>
-        {props.description}
+        {'Данный интерфейс поддерживает несколько функций расчета: '}
       </p>
         <ul>
-          <li>{props.firstOption}</li>
-          <li>{props.secondOption}</li>
-          <li>{props.thirdOption}</li>
-          <li>{props.fourthOption}</li>
+          <li>{buttonName[0].name + ": " + buttonName[0].description}</li>
+          <li>{buttonName[1].name + buttonName[1].description}</li>
         </ul>
     </div>
   );
@@ -48,14 +47,22 @@ export default function MainBody({ selectedOption }) {
 
   const renderOption = () => {
     switch (currentOption) {
-      case 'first':
-        return <FirstOption />;
-      case 'second':
-        return <SecondOption />;
-      case 'third':
-        return <ThirdOption />;
-      case 'fourth':
-        return <FourthOption />;
+      case 'firstAuditory':
+        return <FirstAuditoryOption />;
+      case 'secondAuditory':
+        return <SecondAuditoryOption />;
+      case 'thirdAuditory':
+        return <ThirdAuditoryOption />;
+      case 'fourthAuditory':
+        return <FourthAuditoryOption />;
+      case 'firstReport':
+        return <FirstReportOption />;
+      case 'secondReport':
+        return <SecondReportOption />;
+      case 'thirdReport':
+        return <ThirdReportOption />;
+      case 'fourthReport':
+        return <FourthReportOption />;
       default:
         return <DefaultBody />;
     }
@@ -68,21 +75,16 @@ export default function MainBody({ selectedOption }) {
 function DefaultBody() {
   return (
     <div className="base">
-      <MainBlock
-        title={blocks[0].title}
-        description={blocks[0].description}
-        firstOption={blocks[0].firstOption}
-        secondOption={blocks[0].secondOption}
-        thirdOption={blocks[0].thirdOption}
-        fourthOption={blocks[0].fourthOption}/>
+      <MainBlock />
     </div>
   );
 }
 
-function FirstOption() {
+function FirstAuditoryOption() {
   return (
     <div className="base">
-      <TextBlock title={blocks[1].title} description={blocks[1].description} />
+      <TextBlock title={"Расчет аудиторий"}
+                 description={"Для расчета необходимо заполнить следующие поля:"} />
       <ul>
         <li>Прикрепить файл с координатами для сбора аудиторий</li>
         <li>Указать радиус в метрах</li>
@@ -98,7 +100,15 @@ function FirstOption() {
   );
 }
 
-function SecondOption() {
+function FirstReportOption() {
+  return (
+    <div className="base">
+      <h1>First Option for the first button</h1>
+    </div>
+  );
+}
+
+function SecondReportOption() {
   return (
     <div className="base">
       <h1>Second Option for the first button</h1>
@@ -106,7 +116,15 @@ function SecondOption() {
   );
 }
 
-function ThirdOption() {
+function SecondAuditoryOption() {
+  return (
+    <div className="base">
+      <h1>Second Option for the first button</h1>
+    </div>
+  );
+}
+
+function ThirdAuditoryOption() {
   return (
     <div className="base">
       <h1>Third Option for the first button</h1>
@@ -114,7 +132,23 @@ function ThirdOption() {
   );
 }
 
-function FourthOption() {
+function ThirdReportOption() {
+  return (
+    <div className="base">
+      <h1>Third Option for the first button</h1>
+    </div>
+  );
+}
+
+function FourthAuditoryOption() {
+  return (
+    <div className="base">
+      <h1>Fourth Option for the first button</h1>
+    </div>
+  );
+}
+
+function FourthReportOption() {
   return (
     <div className="base">
       <h1>Fourth Option for the first button</h1>
