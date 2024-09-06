@@ -1,24 +1,30 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 export function AuditoryButton({ children, handlers }) {
-    return (
-      <Dropdown>
-        <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
-          {children || "Dropdown button"}
-        </Dropdown.Toggle>
+  return (
+    <Dropdown>
+      <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
+        {children || 'Dropdown button'}
+      </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={handlers.handleFirstClick}>Расчет аудиторий</Dropdown.Item>
-          <Dropdown.Item onClick={handlers.handleSecondClick}>Сбор аудиторий</Dropdown.Item>
-          <Dropdown.Item onClick={handlers.handleThirdClick}>Something else here</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item onClick={handlers.handleFourthClick}>Separated link</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
+      <Dropdown.Menu>
+        <Link to="/audcalc">
+          <Dropdown.Item as="span">Расчет аудиторий</Dropdown.Item>
+        </Link>
+
+        <Link to="/audcollect">
+        <Dropdown.Item as="span">Сбор аудиторий</Dropdown.Item>
+        </Link>
+        <Dropdown.Item>Something else here</Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item>Separated link</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
 }
+
 
 export function AuditoryHandlers(setSelectedOption) {
   return {
@@ -29,7 +35,7 @@ export function AuditoryHandlers(setSelectedOption) {
   };
 }
 
-export function ReportButton({ children, handlers }) {
+export function ReportButton({ children }) {
   return (
     <Dropdown>
       <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
@@ -37,21 +43,12 @@ export function ReportButton({ children, handlers }) {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item onClick={handlers.handleFirstClick}>TrackDero1</Dropdown.Item>
-        <Dropdown.Item onClick={handlers.handleSecondClick}>TrackDero1</Dropdown.Item>
-        <Dropdown.Item onClick={handlers.handleThirdClick}>Something else here</Dropdown.Item>
+        <Dropdown.Item >TrackDero1</Dropdown.Item>
+        <Dropdown.Item >TrackDero1</Dropdown.Item>
+        <Dropdown.Item >Something else here</Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item onClick={handlers.handleFourthClick}>Separated link</Dropdown.Item>
+        <Dropdown.Item >Separated link</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
-}
-
-export function ReportHandlers(setSelectedOption) {
-  return {
-    handleFirstClick: () => setSelectedOption('firstReport'),
-    handleSecondClick: () => setSelectedOption('secondReport'),
-    handleThirdClick: () => setSelectedOption('thirdReport'),
-    handleFourthClick: () => setSelectedOption('fourthReport'),
-  };
 }

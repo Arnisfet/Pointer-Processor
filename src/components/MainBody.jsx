@@ -4,7 +4,7 @@ import { TextField } from './TextField.jsx';
 import { buttonName } from '../../data/button-naming.js';
 
 
-function MainBlock(props) {
+export function MainBlock(props) {
   return (
     <div>
       <h1>Основные функции веб интерфейса</h1>
@@ -19,7 +19,7 @@ function MainBlock(props) {
   );
 }
 
-function TextBlock(props) {
+export function TextBlock(props) {
   return (
     <div>
       <h1>{props.title}</h1>
@@ -34,71 +34,11 @@ export default function MainBody({ selectedOption }) {
   const [currentOption, setCurrentOption] = useState('default');
   const [animation, setAnimation] = useState('');
 
-  useEffect(() => {
-    if (currentOption !== selectedOption) {
-      // Trigger fade-out animation
-      setAnimation('fade-out');
-      setTimeout(() => {
-        setCurrentOption(selectedOption);
-        setAnimation('fade-in');
-      }, 500); // Duration of fade-out before switching content
-    }
-  }, [selectedOption]);
-
-  const renderOption = () => {
-    switch (currentOption) {
-      case 'firstAuditory':
-        return <FirstAuditoryOption />;
-      case 'secondAuditory':
-        return <SecondAuditoryOption />;
-      case 'thirdAuditory':
-        return <ThirdAuditoryOption />;
-      case 'fourthAuditory':
-        return <FourthAuditoryOption />;
-      case 'firstReport':
-        return <FirstReportOption />;
-      case 'secondReport':
-        return <SecondReportOption />;
-      case 'thirdReport':
-        return <ThirdReportOption />;
-      case 'fourthReport':
-        return <FourthReportOption />;
-      default:
-        return <DefaultBody />;
-    }
-  };
-
-  return <div className={`main-body ${animation}`}>{renderOption()}</div>;
+  return (<div className={'main-body'}></div>);
 }
 
 // Define all components outside MainBody (best practice)
-function DefaultBody() {
-  return (
-    <div className="base">
-      <MainBlock />
-    </div>
-  );
-}
 
-function FirstAuditoryOption() {
-  return (
-    <div className="base">
-      <TextBlock title={"Расчет аудиторий"}
-                 description={"Для расчета необходимо заполнить следующие поля:"} />
-      <ul>
-        <li>Прикрепить файл с координатами для сбора аудиторий</li>
-        <li>Указать радиус в метрах</li>
-        <li>Указать дату старта сбора</li>
-        <li>Указать дату конца сбора</li>
-      </ul>
-      <div>
-        <FileUploader />
-        <p>Поле</p>
-        <TextField />
-      </div>
-    </div>
-  );
-}
 
 function FirstReportOption() {
   return (
@@ -109,14 +49,6 @@ function FirstReportOption() {
 }
 
 function SecondReportOption() {
-  return (
-    <div className="base">
-      <h1>Second Option for the first button</h1>
-    </div>
-  );
-}
-
-function SecondAuditoryOption() {
   return (
     <div className="base">
       <h1>Second Option for the first button</h1>
