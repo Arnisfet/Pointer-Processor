@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import FileUploader from './FileUploader.jsx';
-import { TextField } from './TextField.jsx';
 import { buttonName } from '../../data/button-naming.js';
 
 

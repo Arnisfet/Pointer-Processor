@@ -1,5 +1,6 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import React from 'react';
+import {audienceOptions} from '/data/audience-options.js'
 import { Link } from 'react-router-dom';
 
 export function AuditoryButton({ children, handlers }) {
@@ -11,15 +12,15 @@ export function AuditoryButton({ children, handlers }) {
 
       <Dropdown.Menu>
         <Link to="/audcalc">
-          <Dropdown.Item as="span">Расчет аудиторий</Dropdown.Item>
+          <Dropdown.Item as="span">{audienceOptions[0].firstOption}</Dropdown.Item>
         </Link>
 
         <Link to="/audcollect">
-        <Dropdown.Item as="span">Сбор аудиторий</Dropdown.Item>
+        <Dropdown.Item as="span">{audienceOptions[0].secondOption}</Dropdown.Item>
         </Link>
-        <Dropdown.Item>Something else here</Dropdown.Item>
+        <Dropdown.Item>{audienceOptions[0].thirdOption}</Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item>Separated link</Dropdown.Item>
+        <Dropdown.Item>{audienceOptions[0].fourthOption}</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
