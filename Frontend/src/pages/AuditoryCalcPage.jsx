@@ -32,8 +32,6 @@ export function AuditoryCalcPage() {
       <div>
         <CalcAudienceForm />
       </div>
-      <p></p>
-      <Button variant="outline-dark">Расчитать</Button>
     </div>
   );
 }

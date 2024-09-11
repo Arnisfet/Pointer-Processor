@@ -1,5 +1,6 @@
 import React from 'react';
 import FileUploader from './FileUploader.jsx';
+import { Button } from 'react-bootstrap';
 
 export function CalcAudienceForm() {
   function handleSubmit(e) {
@@ -57,8 +58,8 @@ export function CalcAudienceForm() {
         </label>
       </p>
       <input name="lastHour" />
-
-      <button type="submit">Submit</button>
+      <p></p>
+      <Button type="submit" variant="outline-dark">Submit</Button>
     </form>
   );
 }
