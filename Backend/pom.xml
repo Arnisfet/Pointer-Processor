@@ -4,14 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>Backend</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>ai.hybrid.backend</groupId>
+    <artifactId>Pointer_Processor_Backend</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>ai-hybrid-backend-api</module>
+        <module>ai-hybrid-backend-impl</module>
+        <module>maven/ai-hybrid-backend-jar</module>
+        <module>maven/ai-hybrid-backend-bom</module>
+    </modules>
+
 
 </project>

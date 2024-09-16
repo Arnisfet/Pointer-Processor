@@ -16,7 +16,7 @@ export default function FileUploader({ onUpload }) {
     if (!file) return;
 
     // Call the FileTransfer function with the file and URL
-    FileTransfer(file, 'http://localhost:8000/upload', {
+    FileTransfer(file, 'http://localhost:8080/audience/file', {
       onProgress: (progress) => {
         console.log(`Upload progress: ${progress}%`);
       }
