@@ -1,65 +1,77 @@
 import React from 'react';
-import FileUploader from './FileUploader.jsx';
 import { Button } from 'react-bootstrap';
 
 export function CalcAudienceForm() {
-  function handleSubmit(e) {
-    // Prevent the browser from reloading the page
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    // Read the form data
+    // Create a FormData object
     const form = e.target;
     const formData = new FormData(form);
 
-    // You can pass formData as a fetch body directly:
-    fetch('/some-api', { method: form.method, body: formData });
+    // Log the form data for debugging
+    console.log('Form Data:', [...formData.entries()]);
 
-    // Or you can work with it as a plain object:
-    const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
+    const successMessageElement = document.getElementById('successMessage');
+    try {
+      // Send PUT request with form data
+      const response = await fetch('http://localhost:8080/audience/calculation', {
+        method: 'PUT',
+        body: formData, // Send FormData directly
+      });
+
+      if (response.ok) {
+        console.log('PUT request successful');
+        successMessageElement.innerText = 'Form submitted successfully!';
+        successMessageElement.style.color = 'green';
+      } else {
+        console.error('PUT request failed with status:', response.status);
+        successMessageElement.innerText = 'Error submitting the form. Status: ' + response.status;
+        successMessageElement.style.color = 'red';
+      }
+    } catch (error) {
+      console.error('Error during fetch:', error);
+      successMessageElement.innerText = 'Error submitting the form. Status: ' + error;
+      successMessageElement.style.color = 'red';
+    }
   }
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
-      <FileUploader />
+    <form method="POST" onSubmit={handleSubmit} encType="multipart/form-data">
       <hr />
 
       <p>
-        <label>
-          Радиус:
-        </label>
+        <label>Радиус:</label>
+        <input name="radius" />
       </p>
-      <input name="radius" />
 
       <p>
-        <label>
-          Дата начала сбора:
-        </label>
+        <label>Дата начала сбора:</label>
+        <input type="date" name="startDate" />
       </p>
-      <input type="date" name="startDate" />
 
       <p>
-        <label>
-          Дата конца сбора:
-        </label>
+        <label>Дата конца сбора:</label>
+        <input type="date" name="finishDate" />
       </p>
-      <input type="date" name="endDate" />
 
       <p>
-        <label>
-          Первый час сбора:
-        </label>
+        <label>Первый час сбора:</label>
+        <input name="firstHour" />
       </p>
-      <input name="firstHour" />
 
       <p>
-        <label>
-          Последний час сбора:
-        </label>
+        <label>Последний час сбора:</label>
+        <input name="lastHour" />
       </p>
-      <input name="lastHour" />
-      <p></p>
+
+      <p>
+        <label>Upload file:</label>
+        <input type="file" name="file" />
+      </p>
+
       <Button type="submit" variant="outline-dark">Submit</Button>
+      <p id="successMessage" style={{ fontWeight: 'bold' }}></p>
     </form>
   );
 }
