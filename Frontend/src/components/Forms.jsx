@@ -52,7 +52,7 @@ export function CalcAudienceForm() {
 
       <p>
         <label>Дата конца сбора:</label>
-        <input type="date" name="endDate" />
+        <input type="date" name="finishDate" />
       </p>
 
       <p>
