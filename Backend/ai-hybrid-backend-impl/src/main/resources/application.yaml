@@ -3,3 +3,9 @@ spring:
     name: ${USERNAME}
     password: ${PASSWORD}
     driver-class-name:
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: DEBUG
+    ai.hybrid: DEBUG

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Slf4j
@@ -22,8 +23,7 @@ public class AudienceControllerImpl implements AudienceController {
     private final PingService pingService;
 
     @Override
-    public ResponseEntity<String> AudienceCalcPut(
-            @ModelAttribute AudienceData data) {
+    public ResponseEntity<String> AudienceCalcPut(AudienceData data) {
         log.info(data.toString());
         return new ResponseEntity<>(HttpStatus.OK);
     }
