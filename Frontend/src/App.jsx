@@ -10,7 +10,7 @@ import { buttonName } from '../data/button-naming.js';
 import { AuditoryButton, ReportButton} from './components/Buttons.jsx';
 import { Routes, Route, Link } from 'react-router-dom'
 
-function Header() {
+function App() {
   return (
     <>
       <div className="top-header">
@@ -27,19 +27,15 @@ function Header() {
         <ReportButton>{buttonName[1].name}</ReportButton>
       </div>
       <div className="main-body">
-      <Routes>
-        <Route path="/" element={<DefaultPage />}></Route>
-        <Route path="/audcalc" element={<AuditoryCalcPage />}></Route>
-        <Route path="/audcollect" element={<AuditoryCollectPage />}></Route>
-      </Routes>
+        <Routes>
+          <Route path="/" element={<DefaultPage />}></Route>
+          <Route path="/audcalc" element={<AuditoryCalcPage />}></Route>
+          <Route path="/audcollect" element={<AuditoryCollectPage />}></Route>
+        </Routes>
       </div>
       {/*<MainBody selectedOption={selectedOption} />*/}
     </>
   );
-}
-
-function App() {
-  return <Header />;
 }
 
 export default App;

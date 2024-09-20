@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @CrossOrigin
@@ -17,5 +18,5 @@ public interface AudienceController {
 
     @PutMapping(value = "/calculation", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<String> AudienceCalcPut(
-            @ModelAttribute AudienceData data);
+            @Valid @ModelAttribute AudienceData data);
 }
