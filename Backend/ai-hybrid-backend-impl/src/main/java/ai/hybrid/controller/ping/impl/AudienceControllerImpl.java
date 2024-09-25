@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class AudienceControllerImpl implements AudienceController {
     private final LauncherInterface launcherService;
 
     @Override
-    public ResponseEntity<String> AudienceCalcPut(AudienceData data) {
+    public ResponseEntity<String> AudienceCalcPut(AudienceData data) throws IOException {
         log.info(data.toString());
         launcherService.launchAudienceCalculation(data);
         return new ResponseEntity<>(HttpStatus.OK);

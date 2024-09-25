@@ -9,6 +9,7 @@ import ai.hybrid.service.LauncherInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Date;
 
 @Service
@@ -23,7 +24,7 @@ public class LauncherService implements LauncherInterface {
         throw new NotFoundException("Some error");
     }
     @Override
-    public void launchAudienceCalculation(AudienceData data) {
+    public void launchAudienceCalculation(AudienceData data) throws IOException {
         String objectId = new ObjectId().toString();
         StatisticData mongoStats = new StatisticData(objectId,
                 "AudienceCalculation",

@@ -17,5 +17,6 @@ public class CalculationParams {
     private Date finishDate;
     private Long startHour;
     private Long finishHour;
-    private String identifier;
+    private String fileName;   // Field to store the name of the uploaded file
+    private byte[] fileData;   // New field to store file data
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @CrossOrigin
 @RequestMapping(value = "/audience")
@@ -16,5 +17,5 @@ public interface AudienceController {
 
     @PutMapping(value = "/calculation", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<String> AudienceCalcPut(
-            @Valid @ModelAttribute AudienceData data);
+            @Valid @ModelAttribute AudienceData data) throws IOException;
 }
