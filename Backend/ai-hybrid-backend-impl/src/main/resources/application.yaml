@@ -1,8 +1,7 @@
 spring:
-  datasource:
-    name: ${USERNAME}
-    password: ${PASSWORD}
-    driver-class-name:
+    data:
+      mongodb:
+        uri: mongodb://green101:37017,green102:37017,green103:37017/pointer_processor
 
 logging:
   level:
