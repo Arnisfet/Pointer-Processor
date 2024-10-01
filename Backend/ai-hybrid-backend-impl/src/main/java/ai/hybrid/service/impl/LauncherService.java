@@ -32,7 +32,7 @@ public class LauncherService implements LauncherInterface {
                 null,
                 "initialized",
                 data.toCalculationData());
+        System.out.println("Saving object: " + mongoStats);
         mongoRepository.save(mongoStats);
-
     }
 }

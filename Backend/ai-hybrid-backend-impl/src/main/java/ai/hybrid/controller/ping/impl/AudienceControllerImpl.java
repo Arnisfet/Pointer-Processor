@@ -15,7 +15,6 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 public class AudienceControllerImpl implements AudienceController {
-
     private final LauncherInterface launcherService;
 
     @Override
