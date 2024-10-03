@@ -1,7 +1,12 @@
 #!/bin/bash
 
+EXTRACT_DIR="/var/www/selfservice-app"
+ARCHIVE_NAME="deployment_archive.tar.gz"
+
+sudo mkdir -p $EXTRACT_DIR
+sudo tar -xzvf $ARCHIVE_NAME -C $EXTRACT_DIR
+
 # Update and install necessary packages
-sudo yum update -y
 sudo yum install -y curl epel-release nginx
 
 # Install nvm and Node.js
@@ -15,31 +20,28 @@ export NVM_DIR="$HOME/.nvm"
 # Install Node.js
 nvm install 20.17.0
 
-# Ensure global npm installs work correctly
-npm install -g serve
+# Capturing last exit code
+systemctl status nginx > /dev/null 2>&1
+exit_code=$?
 
 # Check if Nginx installed successfully
-if systemctl status nginx > /dev/null 2>&1; then
+
+if [ $exit_code -eq 3 ]; then
   echo "Nginx installation successful, proceeding with configuration..."
 
   # Copy Nginx configuration
-  sudo cp -r /home/centos/nginx/conf.d /etc/nginx/
-
-  # Set correct file permissions and SELinux context
-  sudo chown -R nginx:nginx /home/centos/Desktop/dist
-  sudo chcon -R -t httpd_sys_content_t /home/centos/Desktop/dist
-
-  # Open HTTP port in firewall and reload the firewall
-  sudo firewall-cmd --permanent --add-service=http
-  sudo firewall-cmd --reload
+  sudo ln -sf $EXTRACT_DIR/nginx/conf.d/self-service.conf /etc/nginx/conf.d/self-service.conf
 
   # Start and enable Nginx service
   sudo systemctl enable nginx
   sudo systemctl start nginx
 
   echo "Nginx configuration completed!"
+elif [ $exit_code -eq 0 ]; then
+    echo "Nginx is running."
 else
   echo "Nginx installation failed. Skipping configuration steps."
 fi
 
 echo "Deployment completed!"
+
