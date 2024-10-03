@@ -1,5 +1,6 @@
-package ai.hybrid.data;
+package ai.hybrid.data.controller;
 
+import ai.hybrid.data.repository.CalculationParams;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import java.io.IOException;
 import java.util.Date;
 
 @Data
@@ -36,4 +38,16 @@ public class AudienceData {
 
     @NotNull
     MultipartFile file;
+
+    public CalculationParams toCalculationData() throws IOException {
+        return CalculationParams.builder()
+                .status("initialised")
+                .radius(this.radius)
+                .startDate(this.startDate)
+                .startHour(this.firstHour)
+                .finishHour(this.lastHour)
+                .fileData(this.file.getBytes())
+                .fileName(this.file.getOriginalFilename())
+                .build();
+    }
 }

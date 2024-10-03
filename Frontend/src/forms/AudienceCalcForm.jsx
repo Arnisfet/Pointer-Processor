@@ -73,7 +73,7 @@ export function CalcAudienceForm() {
         console.log('Form Data:', [...formData.entries()]);
 
         // Send formData to the backend
-        fetch('http://localhost:40080/audience/calculation', {
+        fetch('http://localhost:48080/audience/calculation', {
           method: 'PUT',
           body: formData,
         })
