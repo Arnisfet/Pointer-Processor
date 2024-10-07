@@ -8,5 +8,5 @@ import java.io.IOException;
 public interface LauncherInterface {
 
     String getPing() throws NotFoundException;
-    void launchAudienceCalculation(AudienceData data) throws IOException;
+    void countAudienceBackend(AudienceData data) throws IOException;
 }

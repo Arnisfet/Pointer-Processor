@@ -20,7 +20,7 @@ public class AudienceControllerImpl implements AudienceController {
     @Override
     public ResponseEntity<String> AudienceCalcPut(AudienceData data) throws IOException {
         log.info(data.toString());
-        launcherService.launchAudienceCalculation(data);
+        launcherService.countAudienceBackend(data);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -3,6 +3,9 @@ spring:
       mongodb:
         uri: mongodb://green101:37017,green102:37017,green103:37017/pointer_processor
 
+server:
+    port: 48080
+
 logging:
   level:
     org.springframework.web: DEBUG
