@@ -4,7 +4,10 @@ import ai.hybrid.config.Config;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import java.lang.reflect.Field;
@@ -26,15 +29,26 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
     @Override
     public T save(T entity) {
         MongoCollection<Document> collection = database.getCollection(collectionName);
-
+        Document doc = convertToDocument(entity);
+        Object id = doc.get("_id");
+        Bson filter = Filters.eq("_id", id);
+        UpdateOptions options = new UpdateOptions().upsert(true);
+        collection.updateOne(filter, new Document("$set", doc), options);
         return entity;
     }
 
+    /**
+     * Finds all the documents with initialized value in the status field
+     * @param clazz
+     * @return
+     */
     @Override
-    public List<T> findAll(Class<T> clazz) {
+    public List<T> findInitialized(Class<T> clazz) {
         MongoCollection<Document> collection = database.getCollection(collectionName);
         List<T> results = new ArrayList<>();
-        MongoCursor<Document> cursor = collection.find().iterator();
+
+        Bson filter = Filters.eq("status", "initialized");
+        MongoCursor<Document> cursor = collection.find().filter(filter).iterator();
         try {
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
@@ -68,6 +82,26 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
             e.printStackTrace();
             throw new RuntimeException("Failed to convert document to entity", e);
         }
+    }
+
+    private Document convertToDocument(T entity) {
+        Document document = new Document();
+
+        try {
+            Class<?> clazz = entity.getClass();
+
+            for (Field field : clazz.getDeclaredFields()) {
+                String fieldName = field.getName();
+                Object value = field.get(entity);
+
+                if (fieldName.equals("_id") && value instanceof String)
+                    value = new ObjectId((String) value);
+                document.put(fieldName, value);
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return document;
     }
 
 }

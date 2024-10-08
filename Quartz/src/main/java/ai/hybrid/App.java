@@ -9,11 +9,7 @@ import org.quartz.impl.StdScheduler;
 import org.quartz.impl.StdSchedulerFactory;
 
 public class App {
-  private static MongoRepository<AudienceCalculationDocument> mongoRepository =
-          new MongoRepository("pointer_processor",
-          "mongo.green.hosts", "calculation");
   public static void main(String[] args) {
-    mongoRepository.findAll(AudienceCalculationDocument.class);
     JobDetail job = JobBuilder.newJob(MyJob.class)
             .withIdentity("myJob", "group1")
             .build();
