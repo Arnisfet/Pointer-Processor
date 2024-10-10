@@ -4,6 +4,9 @@ import ai.hybrid.data.AudienceCalculationDocument;
 
 import java.io.IOException;
 
+/**
+ * Builder for process creation
+ */
 public abstract class JobBuilder {
     protected ProcessBuilder builder;
     public abstract void setBuilder(AudienceCalculationDocument document);

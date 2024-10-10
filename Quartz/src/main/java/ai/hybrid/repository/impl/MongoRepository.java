@@ -19,6 +19,13 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
     private final MongoDatabase database;
     private final String collectionName;
 
+    /**
+     * Creating an appropriate connection with database and collection.
+     * Using java Config class inside to get the connection row from the key.
+     * @param database
+     * @param connection - key in the config!!!!
+     * @param collection
+     */
     public MongoRepository(String database, String connection, String collection) {
         MongoClientURI uri = new MongoClientURI(config.getProperties().getProperty(connection));
         MongoClient mongoClient = new MongoClient(uri);
@@ -26,6 +33,12 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
         this.database = mongoClient.getDatabase(database);
         this.collectionName = collection;
     }
+
+    /** Base method for entity upserting. Updates the document if it exists
+     * and create a new one if it is absent.
+     * @param entity - Your class which is presented as a document in DB
+     * @return
+     */
     @Override
     public T save(T entity) {
         MongoCollection<Document> collection = database.getCollection(collectionName);
@@ -60,6 +73,12 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
         return results;
     }
 
+    /**
+     * Transforming the document to entity using reflection methods
+     * @param document
+     * @param clazz
+     * @return
+     */
     private T convertToEntity(Document document, Class<T> clazz) {
         try {
             T entity = clazz.getDeclaredConstructor().newInstance();
@@ -84,6 +103,11 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
         }
     }
 
+    /**
+     * Transforming entity to the document using reflection
+     * @param entity
+     * @return
+     */
     private Document convertToDocument(T entity) {
         Document document = new Document();
 
@@ -104,5 +128,4 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
         }
         return document;
     }
-
 }
