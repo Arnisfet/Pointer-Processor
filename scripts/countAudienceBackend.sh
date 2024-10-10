@@ -3,7 +3,7 @@ BASEDIR=$(dirname $0)
 export HADOOP_CONF_DIR=/etc/hadoop/conf
 
 
-spark2-submit --class ai.hybrid.places.GetVisitorPlacesHdfsUseHash \
+spark2-submit --class ai.hybrid.backend.GetVisitorsHdfsUseHashBackend \
 --master yarn-cluster \
 --num-executors 4 \
 --driver-memory 1g \
@@ -22,5 +22,4 @@ spark2-submit --class ai.hybrid.places.GetVisitorPlacesHdfsUseHash \
 --conf "spark.executor.extraJavaOptions=-Dlog4j.configuration=log4j.properties" \
 --conf "spark.executor.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties" \
 --conf "spark.ui.showConsoleProgress=false" \
---files "./log4j.properties" "./ccords.txt" \
-$BASEDIR/places.jar -i ccords.txt -r 500 -s 2024-07-01 -f 2024-07-30 -bi -sm "$@"
+$BASEDIR/places.jar "$1"

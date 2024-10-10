@@ -18,7 +18,7 @@ public class App {
             .withIdentity("myTrigger", "group1")
             .startNow()
             .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                    .withIntervalInSeconds(10)
+                    .withIntervalInSeconds(20)
                     .repeatForever())
             .build();
     try {

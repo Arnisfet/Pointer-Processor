@@ -44,6 +44,7 @@ public class AudienceData {
                 .status("initialised")
                 .radius(this.radius)
                 .startDate(this.startDate)
+                .finishDate(this.finishDate)
                 .startHour(this.firstHour)
                 .finishHour(this.lastHour)
                 .fileData(this.file.getBytes())

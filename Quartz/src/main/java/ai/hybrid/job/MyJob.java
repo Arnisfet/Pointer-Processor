@@ -7,9 +7,9 @@ import ai.hybrid.repository.impl.MongoRepository;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @DisallowConcurrentExecution
@@ -24,17 +24,27 @@ public class MyJob implements Job{
         if (!listClasses.isEmpty()) {
             listClasses.sort(Comparator.comparing(AudienceCalculationDocument::getStartDate));
             listClasses.forEach(audience -> {
+                System.out.println("document with ID: " + audience.get_id() + " is calculating");
                 audience.setStatus("calculating");
                 mongoRepository.save(audience);
                 JobBuilder process = new ProcessFactory().getCommand(audience);
                 if (process != null) {
                     process.setBuilder(audience);
-                    process.run();
+                    Integer exitCode = process.run();
+                    if (exitCode != 0) {
+                        audience.setStatus("failed");
+                        mongoRepository.save(audience);
+                        System.out.println("Error to get job from document");
+                        return;
+                    }
                 }
                 else
-                    System.out.println("Error to get job from document");
+                    System.out.println("Process creation error! Check the command.");
+                System.out.println("Job with id: " + audience.get_id() + " was executed successfully!");
+                audience.setStatus("finished");
+                audience.setFinishDate(new Date());
+                mongoRepository.save(audience);
             });
         }
-        System.out.println("Executing job");
     }
 }

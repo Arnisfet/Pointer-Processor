@@ -91,6 +91,7 @@ public class MongoRepository<T> implements ai.hybrid.repository.MongoRepository<
             Class<?> clazz = entity.getClass();
 
             for (Field field : clazz.getDeclaredFields()) {
+                field.setAccessible(true);
                 String fieldName = field.getName();
                 Object value = field.get(entity);
 

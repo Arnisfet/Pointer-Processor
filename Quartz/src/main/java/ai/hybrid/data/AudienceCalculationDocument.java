@@ -13,5 +13,6 @@ public class AudienceCalculationDocument {
     private String _id;
     private String job;
     private Date startDate;
+    private Date finishDate;
     private String status;
 }
